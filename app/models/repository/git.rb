@@ -78,7 +78,7 @@ class Repository::Git < Repository
     c = changesets.find(:first, :order => 'committed_on DESC')
     since = (c ? c.committed_on - 7.days : nil)
 
-    revisions = scm.revisions('', nil, nil, {:all => true, :since => since, :reverse => true})
+    revisions = scm.revisions('', nil, nil, {:all => true, :since => since, :reverse => false, :limit => 50})
     return if revisions.nil? || revisions.empty?
 
     recent_changesets = changesets.find(:all, :conditions => ['committed_on >= ?', since])
@@ -92,8 +92,8 @@ class Repository::Git < Repository
 
     # Save the remaining ones to the database
     unless revisions.nil?
-      revisions.each do |rev|
-        transaction do
+      transaction do
+        revisions.each do |rev|
           changeset = Changeset.new(
               :repository => self,
               :revision   => rev.identifier,
