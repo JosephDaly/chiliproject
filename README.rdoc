@@ -1,3 +1,8 @@
+= What does this fork contain?
+
+This fork contains a branch fast-git that speeds up the git repo viewer in ChiliProject. It makes it useable with large repos like the linux kernel.
+
+
 = ChiliProject
 
 ChiliProject is a web based project management system. It supports your team throughout the complete project life cycle, from setting up and discussing a project plan, over tracking issues and reporting work progress to collaboratively sharing knowledge.
